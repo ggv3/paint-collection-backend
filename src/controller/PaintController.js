@@ -15,12 +15,13 @@ router.post('/addpaint', (req, res) => {
 		res.status(401).send('Invalid token');
 	} else {
 		try {
-			Paint.findAll({ where: { name: req.body.name } }).then(paints => {
+			Paint.findAll({ where: { name: req.body.name, type: req.body.type } }).then(paints => {
 				if (paints.length > 0) {
-					res.status(400).send('duplicate entry found');
+					res.status(400).send('duplicate paint found');
 				} else {
 					Paint.create({
 						name: req.body.name,
+						type: req.body.type,
 						amount: req.body.amount
 					});
 					res.status(200).send('Paint added succesfully');
@@ -53,6 +54,7 @@ router.post('/updatepaint', (req, res) => {
 				if (paint !== null) {
 					paint.update({
 						name: req.body.name,
+						type: req.body.type,
 						amount: req.body.amount
 					});
 					res.status(200).send('Paint updated succesfully');

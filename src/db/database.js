@@ -20,7 +20,8 @@ const initDatabase = () => {
 	Paint.init(
 		{
 			id: { type: Sequelize.INTEGER, field: 'id', primaryKey: true, autoIncrement: true },
-			name: { type: Sequelize.STRING(100), field: 'name', allowNull: false, unique: true },
+			name: { type: Sequelize.STRING(100), field: 'name', allowNull: false },
+			type: { type: Sequelize.STRING(100), field: 'base', allowNull: false },
 			amount: { type: Sequelize.INTEGER, field: 'amount', defaultValue: 0 }
 		},
 		{ sequelize, modelName: 'paint' }
