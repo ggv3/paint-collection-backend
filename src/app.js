@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
-
+const db = require('./db/database');
 require('dotenv').config();
+
+db.initDatabase();
 
 app.get('/', (req, res) => res.send('Hello world!'));
 
