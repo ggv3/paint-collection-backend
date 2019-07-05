@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const Paint = require('../model/Paint');
 
 require('dotenv').config();
 
@@ -16,17 +17,14 @@ const initDatabase = () => {
 		.catch(err => {
 			console.error('Unable to connect to the database:', err);
 		});
-
-	class Paint extends Sequelize.Model {}
 	Paint.init(
 		{
 			id: { type: Sequelize.INTEGER, field: 'id', primaryKey: true, autoIncrement: true },
-			name: { type: Sequelize.STRING(100), field: 'name', allowNull: false },
+			name: { type: Sequelize.STRING(100), field: 'name', allowNull: false, unique: true },
 			amount: { type: Sequelize.INTEGER, field: 'amount', defaultValue: 0 }
 		},
 		{ sequelize, modelName: 'paint' }
 	);
-
 	Paint.sync({ force: true });
 };
 
