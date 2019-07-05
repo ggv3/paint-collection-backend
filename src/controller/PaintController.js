@@ -33,4 +33,19 @@ router.get('/getpaints', (req, res) => {
 	}
 });
 
+router.post('/updatepaint', (req, res) => {
+	try {
+		Paint.findByPk(req.body.id).then(paint => {
+			paint.update({
+				name: req.body.name,
+				amount: req.body.amount
+			});
+		});
+		res.status(200).send('Paint updated');
+	} catch (error) {
+		console.log(e);
+		res.status(500).send('Unexpected error');
+	}
+});
+
 module.exports = router;
