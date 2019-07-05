@@ -36,12 +36,32 @@ router.get('/getpaints', (req, res) => {
 router.post('/updatepaint', (req, res) => {
 	try {
 		Paint.findByPk(req.body.id).then(paint => {
-			paint.update({
-				name: req.body.name,
-				amount: req.body.amount
-			});
+			if (paint !== null) {
+				paint.update({
+					name: req.body.name,
+					amount: req.body.amount
+				});
+				res.status(200).send('Paint updated succesfully');
+			} else {
+				res.status(404).send('Paint not found');
+			}
 		});
-		res.status(200).send('Paint updated');
+	} catch (error) {
+		console.log(e);
+		res.status(500).send('Unexpected error');
+	}
+});
+
+router.post('/deletepaint', (req, res) => {
+	try {
+		Paint.findByPk(req.body.id).then(paint => {
+			if (paint !== null) {
+				paint.destroy();
+				res.status(200).send('Paint deleted succesfully');
+			} else {
+				res.status(404).send('Paint not found');
+			}
+		});
 	} catch (error) {
 		console.log(e);
 		res.status(500).send('Unexpected error');
