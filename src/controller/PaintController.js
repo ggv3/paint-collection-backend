@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.post('/addpaint', (req, res) => {
 	try {
-		Paint.findAll({ where: { name: req.body.name } }).then(entries => {
-			if (entries.length > 0) {
+		Paint.findAll({ where: { name: req.body.name } }).then(paints => {
+			if (paints.length > 0) {
 				res.status(400).send('duplicate entry found');
 			} else {
 				Paint.create({
@@ -18,6 +18,17 @@ router.post('/addpaint', (req, res) => {
 		});
 	} catch (error) {
 		console.log(error);
+		res.status(500).send('Unexpected error');
+	}
+});
+
+router.get('/getpaints', (req, res) => {
+	try {
+		Paint.findAll().then(paints => {
+			res.status(200).send(paints);
+		});
+	} catch (error) {
+		console.log(e);
 		res.status(500).send('Unexpected error');
 	}
 });
