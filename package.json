@@ -1,0 +1,16 @@
+{
+	"name": "paint-collection-backend",
+	"version": "1.0.0",
+	"description": "",
+	"main": "app.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Niko Kaartinen",
+	"license": "GNU v3",
+	"dependencies": {
+		"express": "^4.17.1",
+		"mariadb": "^2.0.5",
+		"sequelize": "^5.9.2"
+	}
+}
