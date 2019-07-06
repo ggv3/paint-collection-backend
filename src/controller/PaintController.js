@@ -40,7 +40,7 @@ router.get('/getpaints', (req, res) => {
 			res.status(200).send(paints);
 		});
 	} catch (error) {
-		console.log(e);
+		console.log(error);
 		res.status(500).send('Unexpected error');
 	}
 });
